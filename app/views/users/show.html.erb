@@ -1,1 +1,17 @@
-<h3><%= @user.username %></h3>
+<h2><%= @user.username %></h2>
+
+<h3>Add Friends:</h3>
+<form action="<%= friend_circles_url %>" method="post">
+	<% @users.try(:each) do |user| %>
+		<p>
+			<input type="checkbox"
+						 name="user[friendship_ids][]"
+						 value="<%= user.id %>"
+						 id="friendship_id_<%= user.id %>" />
+	 		<label for="friendship_id_<%= user.id %>"><%= user.username %></label>
+		</p>
+	<% end %>
+
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+	<input type="submit" value="Add Friends" />
+</form>
