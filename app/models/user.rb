@@ -20,14 +20,8 @@ class User < ActiveRecord::Base
 
   validates :password_digest, :presence => true
 
-  # has_many :friendings
   has_many :friend_circles
-  # user_id     # friend_id
-  # 1            2
-  # 1            3
-  # 1            5
   has_many :friends, :through => :friend_circles
-  # user.friends
 
   def password=(password)
     self.password_digest = BCrypt::Password.create(password)

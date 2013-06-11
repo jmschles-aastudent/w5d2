@@ -1,5 +1,15 @@
 <h2><%= @user.username %></h2>
 
+
+<h3>Friend Circles</h3>
+<ul>
+	<% @user.friend_circles.try(:each) do |circle| %>
+		<li><%= link_to circle.name, friend_circle_url(circle) %></li>
+	<% end %>
+</ul>
+
+<p><%= link_to "Create Circle", new_friend_circle_url %>
+
 <h3>Add Friends:</h3>
 <form action="<%= friend_circles_url %>" method="post">
 	<% @users.try(:each) do |user| %>

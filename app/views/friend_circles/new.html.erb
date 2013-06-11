@@ -1,0 +1,11 @@
+<h3>New Friend Circle</h3>
+
+<form action="<%= friend_circles_url %>" method="post">
+	<p>
+		<label for="circle_name">Name: </label>
+		<input type="text" name="friend_circle[name]" id="circle_name" />
+	</p>
+
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+	<input type="submit" value="Create Friend Circle" />
+</form>

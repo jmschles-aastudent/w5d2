@@ -4,18 +4,17 @@
 #
 #  id         :integer          not null, primary key
 #  user_id    :integer
-#  friend_id  :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  name       :string(255)
 #
 
 class FriendCircle < ActiveRecord::Base
-  attr_accessible :user_id, :friend_id
+  attr_accessible :user_id, :name
 
   belongs_to :user
-  belongs_to :friend,
-    :class_name => "User",
-    :foreign_key => :friend_id
+  has_many :memberships
+  has_many :friends, :through => :memberships, :source => :friend
 
   # has_many :friends, :through => :user, :source =>
 
