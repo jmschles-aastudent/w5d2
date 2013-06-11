@@ -12,8 +12,11 @@ SocialThing::Application.routes.draw do
   # end
 
   resources :users
-  resources :friend_circles, :path => "circles"
-  resources :memberships, :only => [:create, :destroy]
+  resources :friend_circles, :path => "circles" do
+    member do
+      resources :memberships, :only => [:create, :destroy]
+    end
+  end
 
   get "signup" => "users#new"
 

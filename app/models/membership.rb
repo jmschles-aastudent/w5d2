@@ -14,5 +14,6 @@ class Membership < ActiveRecord::Base
 
   belongs_to :friend_circle
   belongs_to :friend, :class_name => "User"
+  # has_many :friends, :through => "Membership", :source => :friend
 
 end

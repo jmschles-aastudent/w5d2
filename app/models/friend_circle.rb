@@ -10,7 +10,7 @@
 #
 
 class FriendCircle < ActiveRecord::Base
-  attr_accessible :user_id, :name
+  attr_accessible :user_id, :name, :friend_ids
 
   belongs_to :user
   has_many :memberships
