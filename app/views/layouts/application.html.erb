@@ -8,6 +8,20 @@
 </head>
 <body>
 
+
+<% if logged_in? %>
+	<p>current_user: <%= current_user.username %></p>
+	<p>session_token: <%= session[:session_token] %></p>
+	<p><%= link_to "logout", logout_url %></p>
+<% else %>
+	<p>
+		<%= link_to "login", login_url %> |
+		<%= link_to "signup", signup_url %>
+	</p>
+<% end %>
+
+<hr/>
+
 <%= yield %>
 
 </body>
