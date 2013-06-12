@@ -32,6 +32,14 @@ class User < ActiveRecord::Base
     :foreign_key => :author_id,
     :dependent => :destroy
 
+  has_many :circle_memberships,
+    :class_name => "Membership",
+    :foreign_key => :friend_id
+
+  has_many :membered_circles,
+    :through => :circle_memberships,
+    :source => :friend_circle
+
   # has_many :shared_posts, :through => :posts, :source => :post_shares
 
   def password=(password)

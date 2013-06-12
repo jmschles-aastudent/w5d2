@@ -11,7 +11,12 @@ SocialThing::Application.routes.draw do
   #   end
   # end
 
-  resources :users
+  resources :users do
+    member do
+      get "feed" => "posts#index"
+    end
+  end
+
   resources :friend_circles, :path => "circles" do
     member do
       resources :memberships, :only => [:create, :destroy]
@@ -24,8 +29,6 @@ SocialThing::Application.routes.draw do
       resources :links, :only => [:create, :destroy]
     end
   end
-
-  # resources :friend_circles, :only => [:create, :new, :destroy]
 
   resource :session, :only => [:create, :new, :destroy]
   get "signup" => "users#new"

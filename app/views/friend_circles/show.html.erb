@@ -2,7 +2,6 @@
 
 <h3>Add Friends:</h3>
 <form action="<%= friend_circle_url(@circle) %>" method="post">
-	<input type="hidden" name="_method" value="put">
 
 	<% @users.try(:each) do |user| %>
 		<p>
@@ -15,7 +14,9 @@
 	 		<label for="friend_id_<%= user.id %>"><%= user.username %></label>
 		</p>
 	<% end %>
+	<input type="hidden" name="friend_circle[friend_ids][]" value="" />
 
 	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+	<input type="hidden" name="_method" value="put" />
 	<input type="submit" value="Add Friends" />
 </form>

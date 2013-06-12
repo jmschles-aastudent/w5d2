@@ -16,6 +16,11 @@ class FriendCircle < ActiveRecord::Base
   has_many :memberships
   has_many :friends, :through => :memberships, :source => :friend
 
+  has_many :post_shares
+  has_many :posts_shared_with
+    :through => :post_shares,
+    :source => :post
+
   # has_many :friends, :through => :user, :source =>
 
 end

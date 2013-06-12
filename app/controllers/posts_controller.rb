@@ -1,4 +1,19 @@
 class PostsController < ApplicationController
+  def index
+    # @posts = Post.
+    query = <<-SQL
+      SELECT posts.*
+      FROM posts
+      INNER JOIN post_shares
+      ON posts.id = post_shares.post_id
+      INNER JOIN memberships
+      ON post_shares.friend_circle_id = memberships.friend_circle_id
+      WHERE memberships.friend_id = ?
+    SQL
+    @posts = ActiveRecord::Base.connection.execute(query, current_user.id)
+    render :json => @posts
+  end
+
   def new
     @post = Post.new
   end
