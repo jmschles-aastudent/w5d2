@@ -23,6 +23,10 @@ class User < ActiveRecord::Base
   has_many :friend_circles
   has_many :friends, :through => :friend_circles
 
+  has_many :posts, :foreign_key => :author_id
+
+  # has_many :shared_posts, :through => :posts, :source => :post_shares
+
   def password=(password)
     self.password_digest = BCrypt::Password.create(password)
   end

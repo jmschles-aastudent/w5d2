@@ -1,0 +1,36 @@
+<h3>New Post</h3>
+
+<form action="<%= posts_url %>" method="post">
+	<p>
+		<label for="post_title">Title</label>
+		<input type="text" name="post[title]" id="post_title" />
+	</p>
+
+	<p>
+		<label for="post_body">Description</label>
+		<textarea name="post[body]" id="post_body"></textarea>
+	</p>
+
+	<p>
+		<h4>Links</h4>
+		<% 3.times do |i| %>
+			<input type="text" name="post[links_attributes][<%= i %>][url]" />
+		<% end %>
+	</p>
+
+	<p>
+		<h4>Circle to share with</h4>
+		<% current_user.friend_circles.try(:each) do |circle| %>
+			<p>
+				<input type="checkbox"
+							 name="post[friend_circle_ids][]"
+							 value="<%= circle.id %>"
+							 id="circle_id_<%= circle.id %>" />
+		 		<label for="circle_id_<%= circle.id %>"><%= circle.name %></label>
+			</p>
+		<% end %>
+	</p>
+
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+	<input type="submit" value="Create Post" />
+</form>

@@ -18,11 +18,17 @@ SocialThing::Application.routes.draw do
     end
   end
 
-  get "signup" => "users#new"
+  resources :posts do
+    member do
+      resources :post_shares, :only => [:create, :destroy]
+      resources :links, :only => [:create, :destroy]
+    end
+  end
 
   # resources :friend_circles, :only => [:create, :new, :destroy]
 
   resource :session, :only => [:create, :new, :destroy]
+  get "signup" => "users#new"
   get "login" => "sessions#new"
   get "logout" => "sessions#destroy"
 
