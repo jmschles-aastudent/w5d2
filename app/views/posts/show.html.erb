@@ -1,0 +1,17 @@
+<h3><%= @post.title %></h3>
+
+<p><%= @post.body %></p>
+
+<h4>Links: </h4>
+<ul>
+	<% @post.links.try(:each) do |link| %>
+		<li><%= link.url %></li>
+	<% end %>
+</ul>
+
+<h4>Shared with: </h4>
+<ul>
+	<% @post.friend_circles.try(:each) do |circle| %>
+		<li><%= link_to circle.name, friend_circle_url(circle) %></li>
+	<% end %>
+</ul>

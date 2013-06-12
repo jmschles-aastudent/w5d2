@@ -15,15 +15,22 @@
 class User < ActiveRecord::Base
   attr_accessible :username, :password
 
-  validates :username, :presence => true,
-                       :uniqueness => true
+  validates :username,
+    :presence => true,
+    :uniqueness => true
 
-  validates :password_digest, :presence => true
+  validates :password_digest,
+    :presence => true
 
-  has_many :friend_circles
-  has_many :friends, :through => :friend_circles
+  has_many :friend_circles,
+    :dependent => :destroy
 
-  has_many :posts, :foreign_key => :author_id
+  has_many :friends,
+    :through => :friend_circles
+
+  has_many :posts,
+    :foreign_key => :author_id,
+    :dependent => :destroy
 
   # has_many :shared_posts, :through => :posts, :source => :post_shares
 
